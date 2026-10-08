@@ -1,0 +1,21 @@
+schema: spec-driven
+
+context: |
+  Projeto: landing page de alto padrão da Odonto Excellence Itapoá, clínica odontológica
+  franqueada da rede Odonto Excellence (Av. Celso Ramos, 512 — Cambijú, Itapoá - SC).
+  Stack: Astro 7 + Lumos for Astro (CSS puro com custom properties, sem Tailwind).
+  Deploy: Cloudflare (wrangler.jsonc). Node >= 22.12.
+  Convenções: seguir LUMOS.md e AGENTS.md. Compor páginas com componentes existentes;
+  componente custom só quando houver CSS ou script próprio; sem px; tokens em src/styles/base.css.
+  Idioma do site e dos artefatos OpenSpec: pt-BR.
+  Textos: docs/copy-landing-page.md é a fonte da verdade. Não inventar textos, números ou depoimentos.
+  Identidade: branco + vermelho #de1f26 (logo) + preto do logo como neutro escuro.
+  Elegante, minimalista, muito respiro. Inspiração: https://www.odontoexcellence.com.br/
+  CTA único: formulário (nome + serviço) que abre https://wa.me/5547997660991 com mensagem pronta.
+  Sem backend.
+  Publicidade odontológica (CFO): sem preços, sem anunciar gratuidade ou formas de pagamento,
+  sem promessa de resultado; nome e CRO do responsável técnico no rodapé.
+
+rules:
+  tasks:
+    - Terminar cada grupo de tarefas com `npm run check` e `npm run build` sem erros.
