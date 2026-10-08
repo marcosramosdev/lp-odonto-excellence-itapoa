@@ -90,7 +90,7 @@ const content = await slotContent(Astro.slots);
         list-style-type: decimal;
       }
       & li::marker {
-        color: color-mix(in lab, currentcolor 60%, transparent);
+        color: var(--text-2);
       }
       & li + li {
         margin-top: var(--space-2);

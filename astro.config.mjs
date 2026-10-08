@@ -15,16 +15,20 @@ export default defineConfig({
     {
       name: "Inter",
       cssVariable: "--font-inter",
-      provider: fontProviders.local(),
-      options: {
-        variants: [
-          {
-            weight: 400,
-            style: "normal",
-            src: ["./src/assets/fonts/inter-regular.woff2"],
-          },
-        ],
-      },
+      provider: fontProviders.google(),
+      weights: [400, 500],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["sans-serif"],
+    },
+    {
+      name: "Cormorant Garamond",
+      cssVariable: "--font-cormorant",
+      provider: fontProviders.google(),
+      weights: [500],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["serif"],
     },
   ],
   vite: { build: { cssTarget: "safari15.4" } },

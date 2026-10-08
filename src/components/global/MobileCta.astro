@@ -1,0 +1,36 @@
+---
+import Button from "@/components/Button.astro";
+
+interface Props {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+}
+
+const { render = true } = Astro.props;
+---
+
+{
+  render && (
+    <div class="mobile-cta_wrap">
+      <Button element="link" href="/#agendar" class="width-full padding-block-4">
+        Agendar avaliação
+      </Button>
+    </div>
+  )
+}
+
+<style is:global>
+  @layer components {
+    .mobile-cta_wrap {
+      position: sticky;
+      bottom: 0;
+      z-index: 90;
+      padding: var(--space-2) var(--site-margin);
+      background-color: var(--background);
+      border-top: var(--border-width) solid var(--border);
+      @media (width >= 64rem) {
+        display: none;
+      }
+    }
+  }
+</style>

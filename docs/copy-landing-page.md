@@ -29,7 +29,7 @@ O Código de Ética Odontológica proíbe anunciar **serviços gratuitos**, **pr
 ## Meta (SEO)
 
 - **Title:** `Odonto Excellence Itapoá | Implantes, Ortodontia e Prótese em Itapoá - SC`
-- **Meta description:** `Odontologia de alto padrão no Cambijú, em Itapoá. Implantes, ortodontia, prótese e clínica geral, com avaliação sem pressa e estacionamento próprio. Agende pelo WhatsApp.`
+- **Meta description:** `Odontologia de alto padrão em Itapoá. Implantes, ortodontia, prótese e clínica geral, com avaliação sem pressa e estacionamento próprio. Agende pelo WhatsApp.`
 - **og:title:** `Odonto Excellence Itapoá — Odontologia de alto padrão`
 - **og:description:** `Seis especialidades em um só endereço, com tempo para ouvir você. Agende sua avaliação pelo WhatsApp.`
 
@@ -257,7 +257,7 @@ Número: `+55 47 99766-0991` → `https://wa.me/5547997660991?text=<mensagem cod
 - **Texto:** Unidade franqueada da rede Odonto Excellence.
 - Av. Celso Ramos, 512 — Cambijú, Itapoá - SC, CEP 89249-000
 - WhatsApp: (47) 99766-0991 · Instagram: @odontoexcellence_itapoa
-- **Obrigatório (CFO):** Responsável técnico: `[Nome do(a) cirurgião(ã)-dentista]` — CRO-SC `[nº]`
+- **Obrigatório (CFO):** Responsável técnico: Dr. Renato Gonzales de Souza Forti — CRO-SC 22.911 · EPAO-SC 1.579
 - © 2026 Odonto Excellence Itapoá · CNPJ `[nº]`
 
 ---
@@ -286,7 +286,7 @@ Baixar em alta: `https://images.unsplash.com/photo-<ID>?w=2400&q=85&fm=jpg`
 
 ## Pendências com a clínica
 
-- [ ] Nome e CRO do responsável técnico (obrigatório antes de publicar)
+- [x] Nome e CRO do responsável técnico (obrigatório antes de publicar)
 - [ ] CNPJ
 - [ ] Fotos reais: fachada, recepção, consultório e equipe
 - [ ] Nomes, especialidades e CRO da equipe

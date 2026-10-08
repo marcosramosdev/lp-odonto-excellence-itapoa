@@ -2,13 +2,14 @@
 :root {
   /* Swatches */
   --light-100: #ffffff;
-  --light-200: #ebebeb;
-  --light-300: #d9d9d9;
-  --dark-700: #453e42;
-  --dark-800: #2f2b2d;
-  --dark-900: #1f1d1e;
-  --brand-500: #c6fb50;
-  --brand-text: var(--dark-900);
+  --light-200: #f7f3ee;
+  --light-300: #ede6dd;
+  --dark-700: #3d3b37;
+  --dark-800: #2b2a27;
+  --dark-900: #1c1c1a;
+  --brand-500: #de1f26;
+  --brand-600: #b3171d;
+  --brand-text: var(--light-100);
 
   /* Typography primitives */
   --primary-family: var(--font-inter, system-ui, sans-serif);
@@ -17,6 +18,11 @@
   --primary-bold: 700;
   --primary-trim-top: 0.4em;
   --primary-trim-bottom: 0.38em;
+
+  --secondary-family: var(--font-cormorant, Georgia, serif);
+  --secondary-medium: 500;
+  --secondary-trim-top: 0.35em;
+  --secondary-trim-bottom: 0.33em;
 
   /* Letter spacing */
   --letter-spacing-tight: -0.03em;
@@ -63,71 +69,71 @@
   --display: clamp(var(--display-min) / 16 * 1rem, ((var(--display-min) - ((var(--display-max) - var(--display-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--display-max) - var(--display-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--display-max) / 16 * 1rem);
   --display-min: 64;
   --display-max: 112;
-  --display-line-height: var(--line-height-small);
-  --display-letter-spacing: var(--letter-spacing-tight);
+  --display-line-height: var(--line-height-medium);
+  --display-letter-spacing: var(--letter-spacing-normal);
   --display-text-transform: none;
   --display-margin-top: var(--space-7);
   --display-margin-bottom: var(--space-6);
-  --display-font-family: var(--primary-family);
-  --display-font-weight: var(--primary-medium);
-  --display-trim-top: var(--primary-trim-top);
-  --display-trim-bottom: var(--primary-trim-bottom);
+  --display-font-family: var(--secondary-family);
+  --display-font-weight: var(--secondary-medium);
+  --display-trim-top: var(--secondary-trim-top);
+  --display-trim-bottom: var(--secondary-trim-bottom);
   --display-text-wrap: balance;
 
   --h1: clamp(var(--h1-min) / 16 * 1rem, ((var(--h1-min) - ((var(--h1-max) - var(--h1-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--h1-max) - var(--h1-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--h1-max) / 16 * 1rem);
   --h1-min: 48;
   --h1-max: 80;
-  --h1-line-height: var(--line-height-small);
-  --h1-letter-spacing: var(--letter-spacing-tight);
+  --h1-line-height: var(--line-height-medium);
+  --h1-letter-spacing: var(--letter-spacing-normal);
   --h1-text-transform: none;
   --h1-margin-top: var(--space-7);
   --h1-margin-bottom: var(--space-6);
-  --h1-font-family: var(--primary-family);
-  --h1-font-weight: var(--primary-medium);
-  --h1-trim-top: var(--primary-trim-top);
-  --h1-trim-bottom: var(--primary-trim-bottom);
+  --h1-font-family: var(--secondary-family);
+  --h1-font-weight: var(--secondary-medium);
+  --h1-trim-top: var(--secondary-trim-top);
+  --h1-trim-bottom: var(--secondary-trim-bottom);
   --h1-text-wrap: balance;
 
   --h2: clamp(var(--h2-min) / 16 * 1rem, ((var(--h2-min) - ((var(--h2-max) - var(--h2-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--h2-max) - var(--h2-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--h2-max) / 16 * 1rem);
   --h2-min: 40;
   --h2-max: 64;
-  --h2-line-height: var(--line-height-small);
-  --h2-letter-spacing: var(--letter-spacing-tight);
+  --h2-line-height: var(--line-height-medium);
+  --h2-letter-spacing: var(--letter-spacing-normal);
   --h2-text-transform: none;
   --h2-margin-top: var(--space-7);
   --h2-margin-bottom: var(--space-5);
-  --h2-font-family: var(--primary-family);
-  --h2-font-weight: var(--primary-medium);
-  --h2-trim-top: var(--primary-trim-top);
-  --h2-trim-bottom: var(--primary-trim-bottom);
+  --h2-font-family: var(--secondary-family);
+  --h2-font-weight: var(--secondary-medium);
+  --h2-trim-top: var(--secondary-trim-top);
+  --h2-trim-bottom: var(--secondary-trim-bottom);
   --h2-text-wrap: balance;
 
   --h3: clamp(var(--h3-min) / 16 * 1rem, ((var(--h3-min) - ((var(--h3-max) - var(--h3-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--h3-max) - var(--h3-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--h3-max) / 16 * 1rem);
   --h3-min: 36;
   --h3-max: 48;
   --h3-line-height: var(--line-height-medium);
-  --h3-letter-spacing: var(--letter-spacing-tight);
+  --h3-letter-spacing: var(--letter-spacing-normal);
   --h3-text-transform: none;
   --h3-margin-top: var(--space-6);
   --h3-margin-bottom: var(--space-5);
-  --h3-font-family: var(--primary-family);
-  --h3-font-weight: var(--primary-medium);
-  --h3-trim-top: var(--primary-trim-top);
-  --h3-trim-bottom: var(--primary-trim-bottom);
+  --h3-font-family: var(--secondary-family);
+  --h3-font-weight: var(--secondary-medium);
+  --h3-trim-top: var(--secondary-trim-top);
+  --h3-trim-bottom: var(--secondary-trim-bottom);
   --h3-text-wrap: balance;
 
   --h4: clamp(var(--h4-min) / 16 * 1rem, ((var(--h4-min) - ((var(--h4-max) - var(--h4-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--h4-max) - var(--h4-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--h4-max) / 16 * 1rem);
   --h4-min: 28;
   --h4-max: 32;
   --h4-line-height: var(--line-height-medium);
-  --h4-letter-spacing: var(--letter-spacing-tight);
+  --h4-letter-spacing: var(--letter-spacing-normal);
   --h4-text-transform: none;
   --h4-margin-top: var(--space-6);
   --h4-margin-bottom: var(--space-4);
-  --h4-font-family: var(--primary-family);
-  --h4-font-weight: var(--primary-medium);
-  --h4-trim-top: var(--primary-trim-top);
-  --h4-trim-bottom: var(--primary-trim-bottom);
+  --h4-font-family: var(--secondary-family);
+  --h4-font-weight: var(--secondary-medium);
+  --h4-trim-top: var(--secondary-trim-top);
+  --h4-trim-bottom: var(--secondary-trim-bottom);
   --h4-text-wrap: balance;
 
   --h5: clamp(var(--h5-min) / 16 * 1rem, ((var(--h5-min) - ((var(--h5-max) - var(--h5-min)) / (var(--viewport-max) - var(--viewport-min)) * var(--viewport-min))) / 16 * 1rem + ((var(--h5-max) - var(--h5-min)) / (var(--viewport-max) - var(--viewport-min))) * 100vw), var(--h5-max) / 16 * 1rem);
@@ -258,14 +264,14 @@
 .theme-brand .theme-invert {
   color-scheme: light;
 
-  --background: var(--light-300);
+  --background: var(--light-100);
   --background-2: var(--light-200);
-  --background-3: var(--light-100);
+  --background-3: var(--light-300);
   --background-skeleton: color-mix(in lab, currentcolor 10%, transparent);
   --text: var(--dark-900);
-  --text-2: color-mix(in lab, currentcolor 60%, transparent);
+  --text-2: color-mix(in lab, currentcolor 70%, transparent);
   --border: color-mix(in lab, var(--text) 20%, transparent);
-  --heading-accent: color-mix(in srgb, var(--brand-500), black 20%);
+  --heading-accent: var(--brand-600);
 
   --selection-background: var(--text);
   --selection-text: var(--background);
@@ -273,9 +279,9 @@
   --button-background: var(--brand-500);
   --button-border: var(--button-background);
   --button-text: var(--brand-text);
-  --button-background-hover: var(--text);
+  --button-background-hover: var(--brand-600);
   --button-border-hover: var(--button-background-hover);
-  --button-text-hover: var(--background);
+  --button-text-hover: var(--brand-text);
 
   --button-2-background: transparent;
   --button-2-border: var(--border);
@@ -299,9 +305,9 @@
   --background-3: var(--dark-700);
   --background-skeleton: color-mix(in lab, currentcolor 10%, transparent);
   --text: var(--light-100);
-  --text-2: color-mix(in lab, currentcolor 60%, transparent);
+  --text-2: color-mix(in lab, currentcolor 70%, transparent);
   --border: color-mix(in lab, var(--text) 20%, transparent);
-  --heading-accent: var(--brand-500);
+  --heading-accent: color-mix(in srgb, var(--brand-500), white 50%);
 
   --selection-background: var(--text);
   --selection-text: var(--background);
@@ -309,9 +315,9 @@
   --button-background: var(--brand-500);
   --button-border: var(--button-background);
   --button-text: var(--brand-text);
-  --button-background-hover: var(--text);
+  --button-background-hover: var(--brand-600);
   --button-border-hover: var(--button-background-hover);
-  --button-text-hover: var(--background);
+  --button-text-hover: var(--brand-text);
 
   --button-2-background: transparent;
   --button-2-border: var(--border);
@@ -330,11 +336,11 @@
   color-scheme: dark;
 
   --background: var(--brand-500);
-  --background-2: color-mix(in lab, var(--background) 90%, var(--text));
-  --background-3: color-mix(in lab, var(--background) 80%, var(--text));
+  --background-2: color-mix(in lab, var(--background) 90%, var(--dark-900));
+  --background-3: color-mix(in lab, var(--background) 80%, var(--dark-900));
   --background-skeleton: color-mix(in lab, currentcolor 10%, transparent);
   --text: var(--brand-text);
-  --text-2: color-mix(in lab, currentcolor 60%, transparent);
+  --text-2: var(--text);
   --border: color-mix(in lab, var(--text) 20%, transparent);
   --heading-accent: color-mix(in srgb, var(--text), white 20%);
 
@@ -464,7 +470,11 @@ label {
 }
 
 select:has(option[value=""]:checked) {
-  color: color-mix(in lab, currentcolor 60%, transparent);
+  color: var(--text-2);
+}
+
+html {
+  scroll-padding-top: var(--nav-height);
 }
 
 :target {

@@ -6,7 +6,7 @@ import { slotContent } from "@/utils/slots.ts";
 type Props = HTMLAttributes<"div"> & {
   /** Set to `false` to omit the component. */
   render?: boolean;
-  /** Accessible label. Defaults to `Slider`. */
+  /** Accessible label. Defaults to `Carrossel`. */
   label?: string;
   /** Slider bounds. */
   variant?: "bleed" | "crop-start" | "contained";
@@ -34,7 +34,7 @@ type Props = HTMLAttributes<"div"> & {
 
 const {
   render = true,
-  label = "Slider",
+  label = "Carrossel",
   variant = "bleed",
   xsmall = 1.02,
   small,
@@ -90,13 +90,13 @@ const slides = await slotContent(Astro.slots);
             variant="arrow"
             emphasis="secondary"
             direction="back"
-            label="Previous slide"
+            label="Slide anterior"
             data-step="-1"
           />
           <Button
             variant="arrow"
             emphasis="secondary"
-            label="Next slide"
+            label="Próximo slide"
             data-step="1"
           />
         </div>
@@ -122,7 +122,7 @@ const slides = await slotContent(Astro.slots);
 
     slides.forEach((slide, i) => {
       slide.setAttribute("role", "group");
-      slide.setAttribute("aria-label", `${i + 1} of ${slides.length}`);
+      slide.setAttribute("aria-label", `${i + 1} de ${slides.length}`);
     });
 
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
@@ -164,7 +164,7 @@ const slides = await slotContent(Astro.slots);
           const marker = document.createElement("button");
           marker.type = "button";
           marker.className = "slider_marker";
-          marker.setAttribute("aria-label", `Go to slide ${i + 1}`);
+          marker.setAttribute("aria-label", `Ir para o slide ${i + 1}`);
           marker.addEventListener("click", () =>
             list.scrollTo({ left: i * stride(), behavior: behavior() }),
           );

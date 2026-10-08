@@ -1,6 +1,6 @@
 ---
-import Icon from "@/components/media/Icon.astro";
-import logo from "@/assets/logo/logo.svg";
+import Img from "@/components/media/Img.astro";
+import logo from "@/assets/logo/logo-odonto-excellence.png";
 import { SITE_NAME } from "@/consts.ts";
 
 interface Props {
@@ -16,28 +16,48 @@ const { render = true } = Astro.props;
     <footer class="footer_wrap">
       <div class="footer_inner">
         <div class="footer_top">
-          <a class="footer_logo" href="/" aria-label={SITE_NAME}>
-            <Icon src={logo} variant="full-width" />
+          <a class="footer_logo" href="/#">
+            <Img
+              src={logo}
+              alt={SITE_NAME}
+              variant="densities"
+              width={120}
+              transparent={true}
+            />
           </a>
-          <nav aria-label="Footer">
-            <ul class="footer_links">
-              <li>
-                <a class="footer_link" href="/">
-                  Home
+          <div class="footer_info text-style-small">
+            <p>Unidade franqueada da rede Odonto Excellence.</p>
+            <address class="footer_address">
+              <p>Av. Celso Ramos, 512 — Cambijú, Itapoá - SC, CEP 89249-000</p>
+              <p>
+                WhatsApp:{" "}
+                <a
+                  href="https://wa.me/5547997660991"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  (47) 99766-0991
+                </a>{" "}
+                · Instagram:{" "}
+                <a
+                  href="https://www.instagram.com/odontoexcellence_itapoa/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  @odontoexcellence_itapoa
                 </a>
-              </li>
-              <li>
-                <a class="footer_link" href="/example-components">
-                  Example Components
-                </a>
-              </li>
-            </ul>
-          </nav>
+              </p>
+            </address>
+          </div>
         </div>
-        <div class="footer_bottom">
-          <p class="footer_copyright text-style-small">
+        <div class="footer_bottom text-style-small">
+          <p>
+            Responsável técnico: Dr. Renato Gonzales de Souza Forti — CRO-SC
+            22.911 · EPAO-SC 1.579
+          </p>
+          <p>
             &copy; <span id="year">{new Date().getFullYear()}</span>&#160;
-            {SITE_NAME}
+            {SITE_NAME} · CNPJ [nº]
           </p>
         </div>
       </div>
@@ -60,7 +80,7 @@ const { render = true } = Astro.props;
       justify-content: center;
       padding-block: var(--section-space-small);
       padding-inline: var(--site-margin);
-      background-color: var(--background);
+      background-color: var(--background-2);
       color: var(--text);
       border-top: var(--border-width) solid var(--border);
     }
@@ -78,13 +98,12 @@ const { render = true } = Astro.props;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-4) var(--space-6);
+      gap: var(--space-6);
     }
 
     .footer_logo {
       display: block;
-      width: 7.5rem;
-      max-width: 100%;
+      mix-blend-mode: multiply;
       transition: opacity var(--hover-duration) var(--hover-ease);
       @media (hover: hover) {
         &:hover {
@@ -93,32 +112,27 @@ const { render = true } = Astro.props;
       }
     }
 
-    .footer_links {
+    .footer_info {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: var(--space-4);
-      font-size: var(--text-small);
-      font-weight: var(--primary-medium);
+      flex-direction: column;
+      gap: var(--space-2);
+      max-width: 36ch;
+      color: var(--text-2);
     }
 
-    .footer_link {
-      color: var(--text-2);
-      text-decoration: none;
-      transition: color var(--hover-duration) var(--hover-ease);
-      @media (hover: hover) {
-        &:hover {
-          color: var(--text);
-        }
-      }
+    .footer_address {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      font-style: normal;
     }
 
     .footer_bottom {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
       padding-top: var(--space-4);
       border-top: var(--border-width) solid var(--border);
-    }
-
-    .footer_copyright {
       color: var(--text-2);
     }
   }

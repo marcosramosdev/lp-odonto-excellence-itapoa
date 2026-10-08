@@ -6,7 +6,7 @@ import { slotContent } from "@/utils/slots.ts";
 type Props = HTMLAttributes<"div"> & {
   /** Set to `false` to omit the component. */
   render?: boolean;
-  /** Accessible label. Defaults to `Marquee`. */
+  /** Accessible label. Defaults to `Letreiro`. */
   label?: string;
   /** Travel direction. */
   direction?: "forwards" | "backwards";
@@ -14,7 +14,7 @@ type Props = HTMLAttributes<"div"> & {
 
 const {
   render = true,
-  label = "Marquee",
+  label = "Letreiro",
   direction = "forwards",
   class: className,
   ...rest
@@ -120,7 +120,7 @@ const locals = `--_count: ${count}`;
     const setPlaying = (playing: boolean) => {
       marquee.dataset.state = playing ? "playing" : "paused";
       toggle.setAttribute("aria-pressed", String(playing));
-      toggle.setAttribute("aria-label", playing ? "Pause" : "Play");
+      toggle.setAttribute("aria-label", playing ? "Pausar" : "Reproduzir");
     };
 
     /* Anyone who asked for less motion gets it still, and can start it. */

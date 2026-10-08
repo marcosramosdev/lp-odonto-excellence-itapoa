@@ -27,6 +27,7 @@ const socialImage = new URL(image, Astro.site);
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <Font cssVariable="--font-inter" preload />
+<Font cssVariable="--font-cormorant" preload />
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
@@ -44,6 +45,6 @@ const socialImage = new URL(image, Astro.site);
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={socialImage} />
 
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <meta name="generator" content={Astro.generator} />

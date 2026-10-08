@@ -48,7 +48,7 @@ type Kind =
   | {
       variant: "play";
       emphasis?: Emphasis;
-      /** Accessible label. Defaults to `Play` or `Pause`. */
+      /** Accessible label. Defaults to `Reproduzir` or `Pausar`. */
       label?: string;
       /** Show the pause icon and pressed state. */
       pressed?: boolean;
@@ -57,7 +57,7 @@ type Kind =
   | {
       variant: "close";
       emphasis?: Emphasis;
-      /** Accessible label. Defaults to `Close`. */
+      /** Accessible label. Defaults to `Fechar`. */
       label?: string;
       pressed?: never;
       direction?: never;
@@ -65,7 +65,7 @@ type Kind =
   | {
       variant: "arrow";
       emphasis?: Emphasis;
-      /** Accessible label. Defaults to `Next` or `Previous`. */
+      /** Accessible label. Defaults to `Próximo` or `Anterior`. */
       label?: string;
       pressed?: never;
       /** Arrow direction. */
@@ -117,9 +117,9 @@ const isWritten = variant === "main" || variant === "link";
 const content = isWritten ? await slotContent(Astro.slots) : "";
 
 const named = {
-  play: pressed ? "Pause" : "Play",
-  close: "Close",
-  arrow: direction === "back" ? "Previous" : "Next",
+  play: pressed ? "Pausar" : "Reproduzir",
+  close: "Fechar",
+  arrow: direction === "back" ? "Anterior" : "Próximo",
 };
 ---
 
