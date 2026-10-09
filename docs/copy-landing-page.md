@@ -14,13 +14,13 @@ Itens entre `[colchetes]` são pendências a preencher ou confirmar com a clíni
 
 ### Conformidade com a publicidade odontológica (CFO)
 
-O Código de Ética Odontológica proíbe anunciar **serviços gratuitos**, **preços** e **modalidades de pagamento** em peças publicitárias, e exige **nome e número de CRO do responsável técnico** em anúncios de clínica. Por isso esta copy usa "avaliação **sem compromisso**" e "condições apresentadas na avaliação". A "avaliação gratuita" e o "carnê em 48x" continuam valendo na conversa privada do WhatsApp.
+O Código de Ética Odontológica proíbe anunciar **serviços gratuitos**, **preços** e **modalidades de pagamento** em peças publicitárias, e exige **nome e número de CRO do responsável técnico** em anúncios de clínica. Por isso esta copy não anuncia a avaliação como gratuita e usa "condições apresentadas na avaliação". A "avaliação gratuita" e o "carnê em 48x" continuam valendo na conversa privada do WhatsApp.
 
 **Variante comercial** — usar só se a clínica e o responsável técnico aprovarem o risco:
 
 | Onde | Texto padrão (conforme) | Texto comercial |
 |---|---|---|
-| Hero, selo 1 | Avaliação inicial sem compromisso | Avaliação inicial gratuita |
+| Hero, selo 1 | Atendemos todas as demandas odontológicas | Avaliação inicial gratuita |
 | Investimento, lista | Condições de pagamento apresentadas na avaliação | Carnê em até 48x sem juros, com entrada e sem consulta ao SPC/Serasa · Cartão em até 12x sem juros · Desconto à vista · Boleto |
 | FAQ "Quanto custa?" | …antes de decidir. | …antes de decidir. E a avaliação é gratuita. |
 
@@ -52,7 +52,7 @@ O Código de Ética Odontológica proíbe anunciar **serviços gratuitos**, **pr
 - **CTA primário:** Agendar minha avaliação → `#agendar`
 - **CTA secundário (link):** Conhecer os tratamentos → `#tratamentos`
 - **Selos (3):**
-  - Avaliação inicial sem compromisso
+  - Atendemos todas as demandas odontológicas
   - 6 especialistas na equipe
   - Segunda a sábado, até 20h nos dias úteis
 

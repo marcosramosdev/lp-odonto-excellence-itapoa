@@ -1,9 +1,9 @@
 ---
-import Img from "@/components/media/Img.astro";
-import Button from "@/components/Button.astro";
-import NavLink from "@/components/global/NavLink.astro";
-import logo from "@/assets/logo/logo-odonto-excellence.png";
-import { SITE_NAME } from "@/consts.ts";
+import Img from '@/components/media/Img.astro';
+import Button from '@/components/Button.astro';
+import NavLink from '@/components/global/NavLink.astro';
+import logo from '@/assets/logo/logo-odonto-excellence.png';
+import { SITE_NAME } from '@/consts.ts';
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -17,7 +17,7 @@ const { render = true, overlap = false } = Astro.props;
 
 {
   render && (
-    <header class:list={["nav_wrap", overlap && "overlap"]}>
+    <header class:list={['nav_wrap', overlap && 'overlap']}>
       <div class="nav_inner">
         <a class="nav_logo" href="/#">
           <Img
@@ -76,39 +76,39 @@ const { render = true, overlap = false } = Astro.props;
 </noscript>
 
 <script>
-  const nav = document.querySelector<HTMLElement>(".nav_wrap");
-  const toggle = nav?.querySelector<HTMLButtonElement>(".nav_toggle");
+  const nav = document.querySelector<HTMLElement>('.nav_wrap');
+  const toggle = nav?.querySelector<HTMLButtonElement>('.nav_toggle');
 
   if (nav && toggle) {
     const setOpen = (open: boolean) => {
-      nav.classList.toggle("open", open);
-      toggle.setAttribute("aria-expanded", String(open));
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
     };
 
-    toggle.addEventListener("click", () => {
-      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
-    nav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => setOpen(false));
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
     });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && nav.classList.contains("open")) {
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
         setOpen(false);
         toggle.focus();
       }
     });
 
-    document.addEventListener("click", (event) => {
+    document.addEventListener('click', (event) => {
       const target = event.target;
-      if (!nav.classList.contains("open") || !(target instanceof Node)) return;
+      if (!nav.classList.contains('open') || !(target instanceof Node)) return;
       if (!nav.contains(target)) setOpen(false);
     });
 
     window
-      .matchMedia("(width >= 64rem)")
-      .addEventListener("change", (event) => {
+      .matchMedia('(width >= 64rem)')
+      .addEventListener('change', (event) => {
         if (event.matches) setOpen(false);
       });
   }
@@ -125,7 +125,6 @@ const { render = true, overlap = false } = Astro.props;
       padding-inline: var(--site-margin);
       background-color: var(--background);
       color: var(--text);
-      border-bottom: var(--border-width) solid var(--border);
 
       &.overlap {
         position: fixed;
@@ -184,7 +183,7 @@ const { render = true, overlap = false } = Astro.props;
       height: calc(var(--_bar-gap) + var(--border-width));
       &::before,
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         inset-inline: 0;
         height: var(--border-width);
@@ -261,7 +260,7 @@ const { render = true, overlap = false } = Astro.props;
       text-underline-offset: 0.4em;
       text-decoration-thickness: var(--border-width);
       transition: color var(--hover-duration) var(--hover-ease);
-      &[aria-current="page"] {
+      &[aria-current='page'] {
         color: var(--text);
       }
       @media (hover: hover) {
@@ -312,7 +311,7 @@ const { render = true, overlap = false } = Astro.props;
 
       .nav_link {
         padding-block: 0;
-        &[aria-current="page"] {
+        &[aria-current='page'] {
           text-decoration: underline;
         }
       }

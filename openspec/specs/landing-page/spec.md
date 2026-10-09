@@ -63,7 +63,7 @@ O Hero DEVE exibir o eyebrow "Odonto Excellence · Itapoá, SC", o único `h1` d
 #### Scenario: Selos
 
 - **WHEN** o Hero é exibido
-- **THEN** aparecem "Avaliação inicial sem compromisso", "6 especialistas na equipe" e "Segunda a sábado, até 20h nos dias úteis"
+- **THEN** aparecem "Atendemos todas as demandas odontológicas", "6 especialistas na equipe" e "Segunda a sábado, até 20h nos dias úteis"
 
 ### Requirement: Faixa de credibilidade
 

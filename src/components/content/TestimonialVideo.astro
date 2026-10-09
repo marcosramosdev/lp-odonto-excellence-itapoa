@@ -42,7 +42,11 @@ const posterUrl = poster
 
 {
   render && src && poster && (
-    <figure class:list={["testimonial-video_wrap", className]} {...rest}>
+    <figure
+      class:list={["testimonial-video_wrap", className]}
+      data-poster={posterUrl}
+      {...rest}
+    >
       <button type="button" class="testimonial-video_trigger">
         <span class="testimonial-video_visual">
           <Img
@@ -82,7 +86,6 @@ const posterUrl = poster
         <div class="testimonial-video_player">
           <Video
             src={src}
-            poster={posterUrl}
             variant="custom"
             ratio="9 / 16"
             autoplay={false}
@@ -113,6 +116,7 @@ const posterUrl = poster
     if (!trigger || !visual || !modal || !player || !video) continue;
 
     const show = () => {
+      video.poster ||= wrap.dataset.poster ?? "";
       modal.showModal();
       video.play().catch(() => {});
     };

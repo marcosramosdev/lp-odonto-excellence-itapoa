@@ -30,9 +30,11 @@ import gengivaImage from '@/assets/images/tratamento-gengiva.jpg';
 import fachadaImage from '@/assets/images/faixada_itapoa.webp';
 import protesePlaceholder from '@/assets/images/placeholders/foto-protese.svg';
 import retratoPlaceholder from '@/assets/images/placeholders/foto-retrato-equipe.svg';
+import logoPng from '@/assets/logo/logo-odonto-excellence.png';
+import { SITE_NAME } from '@/consts.ts';
 
 const seals = [
-  'Avaliação inicial sem compromisso',
+  'Atendemos todas as suas demandas odontológicas',
   '6 especialistas na equipe',
   'Segunda a sábado, até 20h nos dias úteis',
 ];
@@ -220,9 +222,53 @@ const faq = [
 const instagramUrl = 'https://www.instagram.com/odontoexcellence_itapoa/';
 const mapsUrl =
   'https://www.google.com/maps/search/?api=1&query=Av.+Celso+Ramos,+512,+Cambiju,+Itapo%C3%A1+-+SC';
+
+const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+const hours = (
+  dayOfWeek: string | string[],
+  opens: string,
+  closes: string,
+) => ({
+  '@type': 'OpeningHoursSpecification',
+  dayOfWeek,
+  opens,
+  closes,
+});
+
+const clinic = {
+  '@context': 'https://schema.org',
+  '@type': 'Dentist',
+  name: SITE_NAME,
+  url: new URL('/', Astro.site).href,
+  telephone: '+55 47 99766-0991',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. Celso Ramos, 512 - Cambijú',
+    addressLocality: 'Itapoá',
+    addressRegion: 'SC',
+    postalCode: '89249-000',
+    addressCountry: 'BR',
+  },
+  openingHoursSpecification: [
+    hours(weekdays, '09:00', '12:00'),
+    hours(weekdays, '14:00', '20:00'),
+    hours('Saturday', '09:00', '12:00'),
+    hours('Saturday', '13:00', '17:00'),
+  ],
+  logo: new URL(logoPng.src, Astro.site).href,
+  image: new URL('/og-image.jpg', Astro.site).href,
+  sameAs: [instagramUrl],
+};
 ---
 
 <Layout>
+  <script
+    is:inline
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(clinic)}
+  />
+
   <!-- Hero -->
   <Section paddingTop="small">
     <ContentWrapper variant="columns">
@@ -236,11 +282,7 @@ const mapsUrl =
         indica só o que você realmente precisa.
       </Paragraph>
       <ButtonWrapper>
-        <Button
-          element="link"
-          href="#agendar"
-          data-modal-open="agendamento"
-        >
+        <Button element="link" href="#agendar" data-modal-open="agendamento">
           Agendar minha avaliação
         </Button>
         <Button element="link" href="#tratamentos" variant="link">
@@ -252,6 +294,8 @@ const mapsUrl =
         slot="column2"
         src={heroImage}
         alt="Close de um sorriso com dentes brancos e alinhados"
+        variant="constrained"
+        sizes="(min-width: 64rem) min(40vw, 42rem), 100vw"
         loading="eager"
         fetchPriority="high"
       />
@@ -385,11 +429,7 @@ const mapsUrl =
       }
     </Grid>
     <ButtonWrapper>
-      <Button
-        element="link"
-        href="#agendar"
-        data-modal-open="agendamento"
-      >
+      <Button element="link" href="#agendar" data-modal-open="agendamento">
         Começar agora
       </Button>
     </ButtonWrapper>
@@ -407,11 +447,7 @@ const mapsUrl =
       </Paragraph>
       <CheckList slot="column2" items={investment} class="margin-top-6" />
       <ButtonWrapper slot="column2">
-        <Button
-          element="link"
-          href="#agendar"
-          data-modal-open="agendamento"
-        >
+        <Button element="link" href="#agendar" data-modal-open="agendamento">
           Agendar minha avaliação
         </Button>
       </ButtonWrapper>
@@ -508,7 +544,9 @@ const mapsUrl =
       </Paragraph>
       <FormWhatsapp class="margin-top-7" />
       <address class="margin-trim margin-top-7">
-        <Paragraph>Av. Celso Ramos, 512 — Cambijú, Itapoá&nbsp;-&nbsp;SC</Paragraph>
+        <Paragraph
+          >Av. Celso Ramos, 512 — Cambijú, Itapoá&nbsp;-&nbsp;SC</Paragraph
+        >
         <Paragraph>Seg. a sex.: 9h às 20h · Sáb.: 9h às 17h</Paragraph>
         <Paragraph>
           Instagram:{' '}
@@ -526,7 +564,8 @@ const mapsUrl =
       <Eyebrow>Localização</Eyebrow>
       <Heading>Com estacionamento próprio</Heading>
       <Paragraph>
-        Av. Celso Ramos, 512 — Cambijú, Itapoá&nbsp;-&nbsp;SC, CEP&nbsp;89249-000
+        Av. Celso Ramos, 512 — Cambijú, Itapoá&nbsp;-&nbsp;SC,
+        CEP&nbsp;89249-000
       </Paragraph>
       <RichText>
         <ul>
