@@ -1,0 +1,158 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Input from '@/components/form/Input.astro';
+import Select from '@/components/form/Select.astro';
+import Button from '@/components/Button.astro';
+import Paragraph from '@/components/typography/Paragraph.astro';
+import { uid } from '@/utils/unique-id.ts';
+import { SERVICOS, WHATSAPP_URL } from '@/utils/whatsapp.ts';
+
+type Props = HTMLAttributes<'form'> & {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+};
+
+const { render = true, class: className, ...rest } = Astro.props;
+
+const id = uid('form-whatsapp');
+---
+
+{
+  render && (
+    <form
+      class:list={['form-whatsapp_wrap', className]}
+      action={WHATSAPP_URL}
+      method="get"
+      target="_blank"
+      {...rest}
+    >
+      <div class="field">
+        <Input
+          variant="first-name"
+          label="Seu nome"
+          name="nome"
+          placeholder="Como podemos te chamar?"
+          required
+          maxlength={60}
+          pattern="\s*\S.*\S\s*"
+          data-error={`${id}-nome-erro`}
+        />
+        <p class="field-error text-style-small" id={`${id}-nome-erro`} hidden>
+          Digite seu nome para continuar.
+        </p>
+      </div>
+      <div class="field">
+        <Select
+          label="Tratamento de interesse"
+          name="servico"
+          placeholder="Selecione um tratamento"
+          required
+          options={SERVICOS}
+          data-error={`${id}-servico-erro`}
+        />
+        <p
+          class="field-error text-style-small"
+          id={`${id}-servico-erro`}
+          hidden
+        >
+          Escolha um tratamento para continuar.
+        </p>
+      </div>
+      <input type="hidden" name="text" />
+      <Button type="submit" class="width-full padding-block-4">
+        Agendar pelo WhatsApp
+      </Button>
+      <Paragraph variant="small" class="color-faded alignment-center">
+        Você será direcionado ao WhatsApp da clínica, (47) 99766-0991.
+      </Paragraph>
+    </form>
+  )
+}
+
+<script>
+  import { whatsappText } from '@/utils/whatsapp.ts';
+
+  declare global {
+    interface Window {
+      dataLayer?: object[];
+    }
+  }
+
+  type Field = HTMLInputElement | HTMLSelectElement;
+
+  for (const form of document.querySelectorAll<HTMLFormElement>(
+    '.form-whatsapp_wrap',
+  )) {
+    const nome = form.querySelector<HTMLInputElement>('[name="nome"]');
+    const servico = form.querySelector<HTMLSelectElement>('[name="servico"]');
+    const text = form.querySelector<HTMLInputElement>('[name="text"]');
+    if (!nome || !servico || !text) continue;
+
+    const fields: Field[] = [nome, servico];
+
+    const report = (field: Field) => {
+      const valid = field.checkValidity();
+      const error = document.getElementById(field.dataset.error ?? '');
+      if (error) error.hidden = valid;
+      if (valid) {
+        field.removeAttribute('aria-invalid');
+        field.removeAttribute('aria-describedby');
+      } else {
+        field.setAttribute('aria-invalid', 'true');
+        if (error) field.setAttribute('aria-describedby', error.id);
+      }
+      return valid;
+    };
+
+    form.noValidate = true;
+
+    form.addEventListener('submit', (event) => {
+      const invalid = fields.filter((field) => !report(field));
+      if (invalid.length) {
+        event.preventDefault();
+        invalid[0].focus();
+        return;
+      }
+      text.value = whatsappText(nome.value, servico.value);
+      window.dataLayer?.push({
+        event: 'lead_whatsapp',
+        servico: servico.value,
+      });
+      form.closest('dialog')?.close();
+    });
+
+    for (const field of fields) {
+      for (const type of ['input', 'change']) {
+        field.addEventListener(type, () => {
+          if (field.hasAttribute('aria-invalid')) report(field);
+        });
+      }
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    const value =
+      event.target.closest<HTMLElement>('[data-servico]')?.dataset.servico;
+    if (!value) return;
+    for (const select of document.querySelectorAll<HTMLSelectElement>(
+      '.form-whatsapp_wrap [name="servico"]',
+    )) {
+      select.value = value;
+      select.dispatchEvent(new Event('change'));
+    }
+  });
+</script>
+
+<style is:global>
+  @layer components {
+    .form-whatsapp_wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      width: 100%;
+      max-width: 30rem;
+      text-align: start;
+    }
+  }
+</style>

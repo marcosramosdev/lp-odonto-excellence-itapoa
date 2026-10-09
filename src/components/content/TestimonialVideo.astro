@@ -1,0 +1,284 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getImage } from "astro:assets";
+import Img from "@/components/media/Img.astro";
+import Icon from "@/components/media/Icon.astro";
+import Video from "@/components/media/Video.astro";
+import Modal from "@/components/interactive/Modal.astro";
+import play from "@/assets/icons/play.svg";
+import { uid } from "@/utils/unique-id.ts";
+
+type Props = HTMLAttributes<"figure"> & {
+  /** Set to `false` to omit the component. */
+  render?: boolean;
+  /** Video URL, filmed in portrait (9:16). Required. */
+  src?: string;
+  /** Poster image, a frame of the video. Required. */
+  poster?: ImageMetadata;
+  /** Quote from the patient, without quotation marks. */
+  quote?: string;
+  /** Who is speaking. */
+  caption?: string;
+  /** Video length, as shown on the poster. */
+  duration?: string;
+};
+
+const {
+  render = true,
+  src,
+  poster,
+  quote,
+  caption,
+  duration,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const id = uid("testimonial-video");
+const posterUrl = poster
+  ? (await getImage({ src: poster, width: 720, format: "webp" })).src
+  : undefined;
+---
+
+{
+  render && src && poster && (
+    <figure class:list={["testimonial-video_wrap", className]} {...rest}>
+      <button type="button" class="testimonial-video_trigger">
+        <span class="testimonial-video_visual">
+          <Img
+            src={poster}
+            alt=""
+            variant="constrained"
+            width={480}
+            height={600}
+            class="cover-absolute"
+          />
+        </span>
+        <span class="testimonial-video_play" aria-hidden="true">
+          <Icon src={play} variant="small" />
+        </span>
+        <span class="testimonial-video_label text-style-small">
+          Assistir ao depoimento{" "}
+          {duration && <span class="testimonial-video_time">{duration}</span>}
+        </span>
+      </button>
+      {quote && (
+        <blockquote class="testimonial-video_quote text-style-h3">
+          “{quote}”
+        </blockquote>
+      )}
+      {caption && (
+        <figcaption class="testimonial-video_caption text-style-small">
+          {caption}
+        </figcaption>
+      )}
+      <Modal
+        id={id}
+        label={
+          caption ? `Depoimento em vídeo de ${caption}` : "Depoimento em vídeo"
+        }
+        variant="media"
+      >
+        <div class="testimonial-video_player">
+          <Video
+            src={src}
+            poster={posterUrl}
+            variant="custom"
+            ratio="9 / 16"
+            autoplay={false}
+            muted={false}
+            loop={false}
+            controls
+            preload="none"
+          />
+        </div>
+      </Modal>
+    </figure>
+  )
+}
+
+<script>
+  for (const wrap of document.querySelectorAll<HTMLElement>(
+    ".testimonial-video_wrap",
+  )) {
+    const trigger = wrap.querySelector<HTMLButtonElement>(
+      ".testimonial-video_trigger",
+    );
+    const visual = wrap.querySelector<HTMLElement>(".testimonial-video_visual");
+    const modal = wrap.querySelector<HTMLDialogElement>("dialog");
+    const player = modal?.querySelector<HTMLElement>(
+      ".testimonial-video_player",
+    );
+    const video = modal?.querySelector("video");
+    if (!trigger || !visual || !modal || !player || !video) continue;
+
+    const show = () => {
+      modal.showModal();
+      video.play().catch(() => {});
+    };
+
+    trigger.addEventListener("click", () => {
+      const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!document.startViewTransition || calm) return show();
+
+      visual.style.viewTransitionName = "testimonial-video";
+      const transition = document.startViewTransition(() => {
+        visual.style.viewTransitionName = "";
+        player.style.viewTransitionName = "testimonial-video";
+        show();
+      });
+      transition.finished.finally(() => {
+        player.style.viewTransitionName = "";
+      });
+    });
+
+    modal.addEventListener("close", () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  }
+</script>
+
+<style is:global>
+  @layer components {
+    .testimonial-video_wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-6);
+      width: 100%;
+      text-align: center;
+    }
+
+    .testimonial-video_trigger {
+      position: relative;
+      display: block;
+      width: min(100%, 24rem);
+      aspect-ratio: 4 / 5;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-main);
+      overflow: clip;
+      background-color: var(--background-skeleton);
+      color: var(--brand-text);
+      box-shadow: 0 1.5rem 3rem -1.5rem
+        color-mix(in lab, var(--text) 45%, transparent);
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(
+          to top,
+          color-mix(in lab, black 60%, transparent),
+          transparent 45%
+        );
+        pointer-events: none;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          .testimonial-video_visual {
+            scale: 1.04;
+          }
+          .testimonial-video_play {
+            scale: 1.08;
+            background-color: var(--button-background-hover);
+          }
+        }
+      }
+    }
+
+    .testimonial-video_visual {
+      position: absolute;
+      inset: 0;
+      display: block;
+      transition: scale calc(var(--hover-duration) * 3) var(--hover-ease);
+    }
+
+    .testimonial-video_play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 4.5rem;
+      aspect-ratio: 1;
+      padding-inline-start: 0.16em;
+      translate: -50% -50%;
+      border-radius: var(--radius-round);
+      background-color: var(--button-background);
+      color: var(--button-text);
+      font-size: 1.5rem;
+      transition:
+        scale var(--hover-duration) var(--hover-ease),
+        background-color var(--hover-duration) var(--hover-ease);
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: var(--border-width) solid var(--brand-text);
+        opacity: 0;
+        animation: testimonial-video-pulse 2.4s var(--hover-ease) infinite;
+      }
+    }
+
+    .testimonial-video_label {
+      position: absolute;
+      inset-inline: 0;
+      bottom: var(--space-5);
+      z-index: 1;
+      font-weight: var(--primary-medium);
+    }
+
+    .testimonial-video_time {
+      margin-inline-start: 0.5em;
+      padding-inline-start: 0.5em;
+      border-inline-start: var(--border-width) solid currentcolor;
+      font-weight: var(--primary-regular);
+    }
+
+    .testimonial-video_quote {
+      max-width: 22ch;
+    }
+
+    .testimonial-video_caption {
+      color: var(--text-2);
+    }
+
+    .testimonial-video_player {
+      width: min(
+        100vw - var(--site-margin) * 2,
+        (100svh - var(--site-margin) * 2) * 9 / 16
+      );
+    }
+
+    @keyframes testimonial-video-pulse {
+      0% {
+        opacity: 0.7;
+        scale: 1;
+      }
+      70%,
+      100% {
+        opacity: 0;
+        scale: 1.6;
+      }
+    }
+
+    ::view-transition-group(testimonial-video) {
+      animation-duration: 0.55s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: var(--radius-main);
+      overflow: clip;
+    }
+
+    ::view-transition-old(testimonial-video),
+    ::view-transition-new(testimonial-video) {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+</style>

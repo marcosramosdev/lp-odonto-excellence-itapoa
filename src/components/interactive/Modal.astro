@@ -11,7 +11,7 @@ type Props = HTMLAttributes<"dialog"> & {
   /** Accessible label. */
   label?: string;
   /** Modal style. */
-  variant?: "small" | "side-panel" | "full-screen";
+  variant?: "small" | "side-panel" | "full-screen" | "media";
   /** Keep open in design mode. */
   preview?: boolean;
 };
@@ -191,6 +191,10 @@ if (import.meta.env.DEV && render && content && !id) {
         padding: 0;
         align-items: stretch;
       }
+
+      &.media {
+        --_from: 0 0;
+      }
     }
 
     .modal_content {
@@ -221,6 +225,12 @@ if (import.meta.env.DEV && render && content && !id) {
         border-radius: 0;
       }
 
+      .modal_wrap.media & {
+        width: auto;
+        max-width: 100%;
+        background-color: transparent;
+      }
+
       .modal_wrap:is([open], .stacki-opened) &,
       .stacki-designer .modal_wrap.preview & {
         opacity: 1;
@@ -228,6 +238,10 @@ if (import.meta.env.DEV && render && content && !id) {
         transition:
           opacity var(--open-duration) var(--open-ease),
           translate var(--open-duration) var(--open-ease);
+      }
+
+      .modal_wrap.media[open] & {
+        transition: none;
       }
 
       @starting-style {
@@ -243,6 +257,13 @@ if (import.meta.env.DEV && render && content && !id) {
       top: var(--space-4);
       inset-inline-end: var(--space-4);
       z-index: 1;
+
+      .modal_wrap.media & {
+        --button-2-background: var(--background);
+        --button-2-border: var(--background);
+        top: var(--space-3);
+        inset-inline-end: var(--space-3);
+      }
     }
 
     .modal_scroll {
@@ -265,6 +286,10 @@ if (import.meta.env.DEV && render && content && !id) {
         min-height: 100%;
         display: grid;
         align-content: center;
+      }
+
+      .modal_wrap.media & {
+        padding: 0;
       }
 
       .modal_wrap:is([open], .stacki-opened) &,

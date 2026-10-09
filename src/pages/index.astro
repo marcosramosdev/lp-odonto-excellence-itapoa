@@ -1,5 +1,566 @@
 ---
-import Layout from "@/layouts/BaseLayout.astro";
+import Layout from '@/layouts/BaseLayout.astro';
+import Section from '@/components/wrapper/Section.astro';
+import ContentWrapper from '@/components/wrapper/ContentWrapper.astro';
+import Grid from '@/components/wrapper/Grid.astro';
+import ButtonWrapper from '@/components/wrapper/ButtonWrapper.astro';
+import Button from '@/components/Button.astro';
+import Card from '@/components/item/Card.astro';
+import Accordion from '@/components/interactive/Accordion.astro';
+import Modal from '@/components/interactive/Modal.astro';
+import AccordionItem from '@/components/interactive/AccordionItem.astro';
+import Img from '@/components/media/Img.astro';
+import Eyebrow from '@/components/typography/Eyebrow.astro';
+import Heading from '@/components/typography/Heading.astro';
+import Paragraph from '@/components/typography/Paragraph.astro';
+import RichText from '@/components/typography/RichText.astro';
+import CheckList from '@/components/typography/CheckList.astro';
+import TestimonialVideo from '@/components/content/TestimonialVideo.astro';
+import FormWhatsapp from '@/components/content/FormWhatsapp.astro';
+import depoimentoVideo from '@/assets/videos/depoimento-aurea.mp4';
+import depoimentoPoster from '@/assets/images/depoimento-aurea-poster.jpg';
+import heroImage from '@/assets/images/hero-sorriso.jpg';
+import clinicaImage from '@/assets/images/clinica-consultorio.jpg';
+import experienciaImage from '@/assets/images/experiencia-raio-x.jpg';
+import implantesImage from '@/assets/images/tratamento-implantes.jpg';
+import ortodontiaImage from '@/assets/images/tratamento-ortodontia.jpg';
+import clinicoGeralImage from '@/assets/images/tratamento-clinico-geral.jpg';
+import canalImage from '@/assets/images/tratamento-canal.jpg';
+import gengivaImage from '@/assets/images/tratamento-gengiva.jpg';
+import fachadaImage from '@/assets/images/faixada_itapoa.webp';
+import protesePlaceholder from '@/assets/images/placeholders/foto-protese.svg';
+import retratoPlaceholder from '@/assets/images/placeholders/foto-retrato-equipe.svg';
+
+const seals = [
+  'Avaliação inicial sem compromisso',
+  '6 especialistas na equipe',
+  'Segunda a sábado, até 20h nos dias úteis',
+];
+
+const stats = [
+  {
+    value: '6',
+    caption:
+      'especialistas: 3 clínicos gerais, 2 ortodontistas e 1 implantodontista',
+  },
+  { value: '6', caption: 'especialidades em um só endereço' },
+  { value: 'Seg. a sáb.', caption: 'até 20h de segunda a sexta' },
+  {
+    value: 'Rede Odonto Excellence',
+    caption: '+de 17 anos de história',
+  },
+];
+
+const pillars = [
+  {
+    title: 'Sem pressa',
+    text: 'A avaliação dura o tempo que o seu caso pedir.',
+  },
+  {
+    title: 'Plano sob medida',
+    text: 'Indicamos só o tratamento que faz sentido para você.',
+  },
+  {
+    title: 'Tudo em um lugar',
+    text: 'Seis especialidades no mesmo endereço, do check-up ao implante.',
+  },
+];
+
+const treatments = [
+  {
+    title: 'Implantes dentários',
+    servico: 'implante',
+    benefit: 'Volte a mastigar e a sorrir sem receio.',
+    text: 'Um pino de titânio substitui a raiz, e uma coroa sob medida devolve o dente. É a solução que mais se aproxima do dente natural, com técnica consolidada e alta previsibilidade.',
+    image: implantesImage,
+    alt: 'Modelo de implante dentário entre dentes',
+  },
+  {
+    title: 'Ortodontia',
+    servico: 'ortodontia',
+    benefit: 'Dentes alinhados, mordida no lugar.',
+    text: 'Aparelho fixo estético, que quase não aparece, ou alinhadores transparentes. Alinhar os dentes melhora o sorriso e também a mastigação.',
+    image: ortodontiaImage,
+    alt: 'Mãos segurando alinhadores transparentes e o estojo',
+  },
+  {
+    title: 'Prótese dentária',
+    servico: 'protese',
+    benefit: 'Conforto e naturalidade para quem perdeu dentes.',
+    text: 'Próteses fixas sobre implante, firmes como dentes naturais, ou removíveis bem planejadas. O planejamento e o material fazem toda a diferença no resultado.',
+    image: protesePlaceholder,
+    alt: 'FOTO: prótese ou paciente sorrindo',
+  },
+  {
+    title: 'Clínico geral',
+    servico: 'clinico-geral',
+    benefit: 'Limpeza, restaurações e prevenção.',
+    text: 'Limpeza completa com ultrassom e restaurações na cor do dente. Cuidar cedo evita tratamentos maiores depois.',
+    image: clinicoGeralImage,
+    alt: 'Exame odontológico com espelho clínico',
+  },
+  {
+    title: 'Tratamento de canal',
+    servico: 'canal',
+    benefit: 'Alívio da dor, dente preservado.',
+    text: 'O canal limpa e sela o interior do dente para evitar a extração. Com a anestesia atual, o desconforto é mínimo.',
+    image: canalImage,
+    alt: 'Dentista analisando radiografias dentárias',
+  },
+  {
+    title: 'Gengiva (periodontia)',
+    servico: 'gengiva',
+    benefit: 'A base saudável do seu sorriso.',
+    text: 'Sangramento, retração ou dente mole são sinais da gengiva. Tratamos a causa com raspagem profunda e acompanhamento.',
+    image: gengivaImage,
+    alt: 'Espelho e sonda odontológicos sobre fundo branco',
+  },
+];
+
+const experience = [
+  {
+    title: 'Avaliação sem cronômetro',
+    text: 'Sua primeira consulta dura o necessário para entender seu caso por completo.',
+  },
+  {
+    title: 'Explicação clara, sem jargão',
+    text: 'Você vê o que foi encontrado e entende cada etapa antes de decidir.',
+  },
+  {
+    title: 'Horários estendidos',
+    text: 'Segunda a sexta, das 9h às 20h. Sábado, das 9h às 17h.',
+  },
+  {
+    title: 'Estacionamento próprio',
+    text: 'Chegue e estacione na clínica, sem procurar vaga.',
+  },
+  {
+    title: 'Urgências, geralmente no mesmo dia',
+    text: 'Dor forte ou dente quebrado? Fale com a gente e encaixamos você conforme a agenda.',
+  },
+  {
+    title: 'Remarcação sem custo',
+    text: 'Imprevistos acontecem. Não cobramos taxa de cancelamento.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Conte o que você procura',
+    text: 'Preencha seu nome e o tratamento de interesse no formulário.',
+  },
+  {
+    title: 'Fale com a recepção no WhatsApp',
+    text: 'Sua mensagem chega pronta. A equipe responde e encontra o melhor horário para você.',
+  },
+  {
+    title: 'Faça sua avaliação',
+    text: 'Exame completo, com tempo para ouvir você e tirar todas as dúvidas.',
+  },
+  {
+    title: 'Receba seu plano',
+    text: 'Você conhece o plano de tratamento, o valor e as condições de pagamento antes de começar.',
+  },
+];
+
+const investment = [
+  'Valor transparente antes de começar',
+  'Condições de pagamento apresentadas na avaliação',
+  'Atendimento particular, com o tempo que cada caso pede',
+];
+
+const faq = [
+  {
+    question: 'Quanto custa o tratamento?',
+    answer:
+      'Cada sorriso é único, então o valor só é definido depois da avaliação, quando sabemos exatamente o que você precisa. Você recebe o plano completo, com valor e condições de pagamento, antes de decidir.',
+  },
+  {
+    question: 'Vocês atendem convênio?',
+    answer:
+      'Não. O atendimento é particular, o que nos permite dedicar o tempo que cada caso pede. As condições de pagamento são apresentadas na avaliação.',
+  },
+  {
+    question: 'Quanto tempo dura a avaliação?',
+    answer:
+      'Não há tempo fixo. Ela dura o necessário para examinar você com calma e responder todas as suas dúvidas.',
+  },
+  {
+    question: 'Tenho medo de dentista. E agora?',
+    answer:
+      'É mais comum do que parece. A equipe explica cada passo antes de fazer e respeita o seu ritmo. A avaliação é uma conversa e um exame, sem nada invasivo.',
+  },
+  {
+    question: 'Vocês atendem urgências?',
+    answer:
+      'Sim, conforme a agenda, geralmente no mesmo dia. Fale com a gente pelo WhatsApp e conte o que está sentindo. Se houver inchaço no rosto que se espalha, febre ou dificuldade para respirar ou engolir, procure um pronto-socorro imediatamente.',
+  },
+  {
+    question: 'Atendem crianças?',
+    answer:
+      'Atendemos a partir de 8 anos, quando a criança colabora com o atendimento. Não temos odontopediatra na equipe.',
+  },
+  {
+    question: 'Atendem pacientes com necessidades especiais?',
+    answer:
+      'Sim, sempre que o paciente permitir o atendimento. Conte para a gente no WhatsApp ao agendar.',
+  },
+  {
+    question: 'Pago alguma taxa se precisar cancelar?',
+    answer:
+      'Não. Não cobramos taxa de cancelamento. Só pedimos que avise pelo WhatsApp.',
+  },
+  {
+    question: 'Moro em outra cidade. Vale a pena ir?',
+    answer:
+      'Muitos pacientes vêm de Garuva, Guaratuba, Joinville e região [confirmar cidades]. A clínica tem estacionamento próprio e atende também aos sábados.',
+  },
+];
+
+const instagramUrl = 'https://www.instagram.com/odontoexcellence_itapoa/';
+const mapsUrl =
+  'https://www.google.com/maps/search/?api=1&query=Av.+Celso+Ramos,+512,+Cambiju,+Itapo%C3%A1+-+SC';
 ---
 
-<Layout />
+<Layout>
+  <!-- Hero -->
+  <Section paddingTop="small">
+    <ContentWrapper variant="columns">
+      <Eyebrow>Odonto Excellence · Itapoá, SC</Eyebrow>
+      <Heading tag="h1">
+        Odontologia de alto padrão, com o tempo que o seu sorriso merece.
+      </Heading>
+      <Paragraph variant="large">
+        Implantes, ortodontia, prótese e clínica geral no Cambijú. Na sua
+        primeira avaliação, a gente ouve sua história, examina com calma e
+        indica só o que você realmente precisa.
+      </Paragraph>
+      <ButtonWrapper>
+        <Button
+          element="link"
+          href="#agendar"
+          data-modal-open="agendamento"
+        >
+          Agendar minha avaliação
+        </Button>
+        <Button element="link" href="#tratamentos" variant="link">
+          Conhecer os tratamentos
+        </Button>
+      </ButtonWrapper>
+      <CheckList items={seals} class="margin-top-7" />
+      <Img
+        slot="column2"
+        src={heroImage}
+        alt="Close de um sorriso com dentes brancos e alinhados"
+        loading="eager"
+        fetchPriority="high"
+      />
+    </ContentWrapper>
+  </Section>
+
+  <!-- Faixa de credibilidade -->
+  <Section paddingTop="small" paddingBottom="small">
+    <Grid small={2} large={4}>
+      {
+        stats.map(({ value, caption }) => (
+          <ContentWrapper>
+            <Paragraph variant="h3">{value}</Paragraph>
+            <Paragraph variant="small" class="margin-top-3 color-faded">
+              {caption}
+            </Paragraph>
+          </ContentWrapper>
+        ))
+      }
+    </Grid>
+  </Section>
+
+  <!-- A clínica -->
+  <Section id="clinica">
+    <ContentWrapper variant="columns">
+      <Eyebrow>A clínica</Eyebrow>
+      <Heading>Cada sorriso é único. O seu plano também.</Heading>
+      <Paragraph>
+        Na Odonto Excellence Itapoá, a primeira consulta é uma conversa. Antes
+        de qualquer procedimento, a equipe entende o que incomoda você, examina
+        com calma e explica cada opção em linguagem simples. Você sai sabendo o
+        que precisa ser feito, por quê e em que ordem. Sem nada a mais, nem a
+        menos.
+      </Paragraph>
+      <Paragraph>
+        Fazemos parte da rede Odonto Excellence e trazemos esse padrão para
+        perto de casa: no Cambijú, com estacionamento próprio e horários que
+        cabem na sua rotina.
+      </Paragraph>
+      <Img
+        slot="column2"
+        src={clinicaImage}
+        alt="Consultório odontológico claro, com cadeira e equipamentos"
+      />
+    </ContentWrapper>
+    <Grid medium={3}>
+      {
+        pillars.map(({ title, text }) => (
+          <ContentWrapper>
+            <Heading tag="h3" variant="h4">
+              {title}
+            </Heading>
+            <Paragraph>{text}</Paragraph>
+          </ContentWrapper>
+        ))
+      }
+    </Grid>
+  </Section>
+
+  <!-- Tratamentos -->
+  <Section id="tratamentos">
+    <ContentWrapper>
+      <Eyebrow>Tratamentos</Eyebrow>
+      <Heading>Do primeiro check-up à reabilitação completa</Heading>
+      <Paragraph maxWidth={60}>
+        Escolha o que você procura. Na avaliação, a gente confirma o melhor
+        caminho para o seu caso.
+      </Paragraph>
+    </ContentWrapper>
+    <Grid medium={2} large={3}>
+      {
+        treatments.map(({ title, servico, benefit, text, image, alt }) => (
+          <Card
+            heading={title}
+            text={`<strong>${benefit}</strong> ${text}`}
+            buttonLabel="Quero avaliar este tratamento"
+            buttonHref="#agendar"
+            data-modal-open="agendamento"
+            data-servico={servico}
+            variant="stacked"
+            image={image}
+            imageAlt={alt}
+          />
+        ))
+      }
+    </Grid>
+  </Section>
+
+  <!-- A experiência -->
+  <Section>
+    <ContentWrapper variant="sticky-visual">
+      <Eyebrow>A experiência</Eyebrow>
+      <Heading>Alto padrão é ser bem cuidado do começo ao fim</Heading>
+      <Grid small={2} class="margin-top-7">
+        {
+          experience.map(({ title, text }) => (
+            <ContentWrapper>
+              <Heading tag="h3" variant="h4">
+                {title}
+              </Heading>
+              <Paragraph>{text}</Paragraph>
+            </ContentWrapper>
+          ))
+        }
+      </Grid>
+      <Img
+        slot="column2"
+        src={experienciaImage}
+        alt="Dentista mostrando uma radiografia na tela a uma paciente sentada na cadeira"
+      />
+    </ContentWrapper>
+  </Section>
+
+  <!-- Como funciona -->
+  <Section id="como-funciona">
+    <ContentWrapper>
+      <Eyebrow>Como funciona</Eyebrow>
+      <Heading>Do primeiro contato ao novo sorriso, em 4 passos</Heading>
+    </ContentWrapper>
+    <Grid medium={2} large={4}>
+      {
+        steps.map(({ title, text }, index) => (
+          <ContentWrapper>
+            <Paragraph variant="h2">{index + 1}</Paragraph>
+            <Heading tag="h3" variant="h4">
+              {title}
+            </Heading>
+            <Paragraph>{text}</Paragraph>
+          </ContentWrapper>
+        ))
+      }
+    </Grid>
+    <ButtonWrapper>
+      <Button
+        element="link"
+        href="#agendar"
+        data-modal-open="agendamento"
+      >
+        Começar agora
+      </Button>
+    </ButtonWrapper>
+  </Section>
+
+  <!-- Investimento -->
+  <Section>
+    <ContentWrapper variant="columns">
+      <Eyebrow>Investimento</Eyebrow>
+      <Heading>Um plano que cabe no seu momento</Heading>
+      <Paragraph slot="column2">
+        O valor do tratamento é definido depois da avaliação, quando sabemos
+        exatamente o que o seu caso precisa. Na mesma consulta, você conhece as
+        condições de pagamento e escolhe a que funciona melhor para você.
+      </Paragraph>
+      <CheckList slot="column2" items={investment} class="margin-top-6" />
+      <ButtonWrapper slot="column2">
+        <Button
+          element="link"
+          href="#agendar"
+          data-modal-open="agendamento"
+        >
+          Agendar minha avaliação
+        </Button>
+      </ButtonWrapper>
+    </ContentWrapper>
+  </Section>
+
+  <!-- Equipe -->
+  <Section render={false}>
+    <ContentWrapper>
+      <Eyebrow>Equipe</Eyebrow>
+      <Heading>Especialistas que acompanham você em cada etapa</Heading>
+      <Paragraph maxWidth={60}>
+        Três clínicos gerais, dois ortodontistas e um implantodontista
+        trabalhando juntos no seu plano.
+      </Paragraph>
+    </ContentWrapper>
+    <Grid medium={2} large={3}>
+      {
+        Array.from({ length: 6 }, () => (
+          <Card
+            eyebrow="[Especialidade]"
+            heading="[Nome do profissional]"
+            text="CRO-SC [nº]"
+            variant="stacked"
+            image={retratoPlaceholder}
+            imageAlt="FOTO: retrato do profissional"
+          />
+        ))
+      }
+    </Grid>
+  </Section>
+
+  <!-- Depoimentos -->
+  <Section align="center">
+    <ContentWrapper centered>
+      <Eyebrow>Pacientes</Eyebrow>
+      <Heading>Quem já sorri com a gente</Heading>
+    </ContentWrapper>
+    <TestimonialVideo
+      src={depoimentoVideo}
+      poster={depoimentoPoster}
+      quote="Eu achava que nunca mais ia sorrir com confiança."
+      caption="Áurea, paciente da rede Odonto Excellence"
+      duration="0:30"
+    />
+    <Grid large={3} render={false}>
+      {
+        Array.from({ length: 3 }, () => (
+          <Card
+            heading="[Nome], [bairro ou cidade]"
+            text="“[Depoimento real]”"
+          />
+        ))
+      }
+    </Grid>
+    <ButtonWrapper render={false}>
+      <Button
+        element="link"
+        href="[link do perfil da clínica no Google]"
+        target="_blank"
+        rel="noopener"
+        variant="link"
+      >
+        Ver avaliações no Google
+      </Button>
+    </ButtonWrapper>
+  </Section>
+
+  <!-- Dúvidas -->
+  <Section id="duvidas">
+    <ContentWrapper variant="sticky-content">
+      <Eyebrow>Dúvidas</Eyebrow>
+      <Heading>Dúvidas frequentes</Heading>
+      <Accordion slot="column2">
+        {
+          faq.map(({ question, answer }) => (
+            <AccordionItem heading={question}>
+              <Paragraph>{answer}</Paragraph>
+            </AccordionItem>
+          ))
+        }
+      </Accordion>
+    </ContentWrapper>
+  </Section>
+
+  <!-- Agende sua avaliação -->
+  <Section id="agendar">
+    <ContentWrapper centered>
+      <Eyebrow>Agende sua avaliação</Eyebrow>
+      <Heading>Seu novo sorriso começa com uma conversa.</Heading>
+      <Paragraph maxWidth={60}>
+        Informe seu nome e o tratamento de interesse. Abrimos o WhatsApp da
+        clínica com a mensagem pronta. É só enviar.
+      </Paragraph>
+      <FormWhatsapp class="margin-top-7" />
+      <address class="margin-trim margin-top-7">
+        <Paragraph>Av. Celso Ramos, 512 — Cambijú, Itapoá&nbsp;-&nbsp;SC</Paragraph>
+        <Paragraph>Seg. a sex.: 9h às 20h · Sáb.: 9h às 17h</Paragraph>
+        <Paragraph>
+          Instagram:{' '}
+          <a href={instagramUrl} target="_blank" rel="noopener">
+            @odontoexcellence_itapoa
+          </a>
+        </Paragraph>
+      </address>
+    </ContentWrapper>
+  </Section>
+
+  <!-- Localização -->
+  <Section id="localizacao">
+    <ContentWrapper variant="columns" column2Class="ratio-4-5">
+      <Eyebrow>Localização</Eyebrow>
+      <Heading>Com estacionamento próprio</Heading>
+      <Paragraph>
+        Av. Celso Ramos, 512 — Cambijú, Itapoá&nbsp;-&nbsp;SC, CEP&nbsp;89249-000
+      </Paragraph>
+      <RichText>
+        <ul>
+          <li>Segunda a sexta: 9h às 20h (intervalo das 12h às 14h)</li>
+          <li>Sábado: 9h às 17h (intervalo das 12h às 13h)</li>
+          <li>Domingo: fechado</li>
+        </ul>
+      </RichText>
+      <ButtonWrapper>
+        <Button
+          element="link"
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener"
+          emphasis="secondary"
+        >
+          Como chegar
+        </Button>
+      </ButtonWrapper>
+      <Img
+        slot="column2"
+        src={fachadaImage}
+        alt="Fachada da Odonto Excellence Itapoá, com o letreiro da clínica e a entrada de vidro"
+      />
+    </ContentWrapper>
+  </Section>
+
+  <!-- Modal de agendamento -->
+  <Modal id="agendamento" label="Agende sua avaliação">
+    <Heading variant="h3">Seu novo sorriso começa com uma conversa.</Heading>
+    <Paragraph>
+      Informe seu nome e o tratamento de interesse. Abrimos o WhatsApp da
+      clínica com a mensagem pronta. É só enviar.
+    </Paragraph>
+    <FormWhatsapp class="margin-top-6" />
+  </Modal>
+</Layout>

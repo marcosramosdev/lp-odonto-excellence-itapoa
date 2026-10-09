@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Garante que o site use a identidade da Odonto Excellence Itapoá (branco, vermelho #de1f26 e preto do logo, serifa elegante nos títulos, logo e favicon oficiais) com contraste WCAG AA em todo texto.
+Garante que o site use a identidade da Odonto Excellence Itapoá (branco, vermelho #de1f26 e preto do logo, tipografia única em Poppins, logo e favicon oficiais) com contraste WCAG AA em todo texto.
 
 ## Requirements
 
@@ -54,19 +54,24 @@ Toda combinação de texto e fundo definida pelos temas do site DEVE ter contras
 - **WHEN** uma seção usa o tema escuro ou o tema da marca (fundo vermelho)
 - **THEN** texto principal, texto secundário, destaque e botões nesses temas também medem pelo menos 4,5:1
 
-### Requirement: Tipografia da marca
+### Requirement: Tipografia em Poppins
 
-Os títulos de destaque (display e h1 a h4) DEVEM usar uma serifa de display elegante. O texto corrido, a navegação, os botões e os títulos menores (h5 e h6) DEVEM usar a Inter. As fontes DEVEM ser servidas pelo próprio domínio do site, só com os pesos usados e com o subconjunto latino, que cobre os acentos do português.
+Todo o texto do site DEVE usar uma única família, a Poppins: títulos, texto corrido, navegação, botões, rótulos e listas. A hierarquia DEVE vir só de tamanho e peso, em três pesos: 600 para títulos (display e h1 a h6), 500 para elementos de interface e ênfase (navegação, botões, eyebrows e `strong`) e 400 para o texto corrido. A fonte DEVE ser servida pelo próprio domínio do site, só com os pesos usados e com o subconjunto latino, que cobre os acentos do português.
 
-#### Scenario: Títulos em serifa
+#### Scenario: Uma família só
 
-- **WHEN** a página exibe um título de nível display, h1, h2, h3 ou h4
-- **THEN** ele é renderizado na serifa de display
+- **WHEN** a página exibe qualquer texto
+- **THEN** ele é renderizado na Poppins
+- **AND** nenhuma outra família da web é carregada
 
-#### Scenario: Texto corrido em Inter
+#### Scenario: Hierarquia por tamanho e peso
 
-- **WHEN** a página exibe um parágrafo, um link da navegação ou um botão
-- **THEN** ele é renderizado na Inter
+- **WHEN** a página exibe um título de nível display a h6
+- **THEN** ele é renderizado na Poppins com peso 600
+- **WHEN** a página exibe um link da navegação, um botão ou um eyebrow
+- **THEN** ele é renderizado com peso 500
+- **WHEN** a página exibe um parágrafo
+- **THEN** ele é renderizado com peso 400
 
 #### Scenario: Fontes servidas pelo próprio site
 

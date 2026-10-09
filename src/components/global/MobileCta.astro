@@ -12,7 +12,12 @@ const { render = true } = Astro.props;
 {
   render && (
     <div class="mobile-cta_wrap">
-      <Button element="link" href="/#agendar" class="width-full padding-block-4">
+      <Button
+        element="link"
+        href="/#agendar"
+        data-modal-open="agendamento"
+        class="width-full padding-block-4"
+      >
         Agendar avaliação
       </Button>
     </div>

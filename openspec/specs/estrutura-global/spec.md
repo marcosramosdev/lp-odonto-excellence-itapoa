@@ -105,9 +105,9 @@ O rodapé DEVE exibir, conforme a seção 14 de `docs/copy-landing-page.md`:
 - "WhatsApp: (47) 99766-0991", com link para `https://wa.me/5547997660991`;
 - "Instagram: @odontoexcellence_itapoa", com link para o perfil;
 - "Responsável técnico: Dr. Renato Gonzales de Souza Forti — CRO-SC 22.911 · EPAO-SC 1.579";
-- "© {ano} Odonto Excellence Itapoá · CNPJ [nº]".
+- "© {ano} Odonto Excellence Itapoá".
 
-Enquanto a clínica não enviar o CNPJ, o placeholder "[nº]" DEVE aparecer como está, para ficar visível na revisão.
+O CNPJ fica fora do rodapé, a pedido do cliente, até ser informado. Nenhum placeholder de CNPJ DEVE aparecer.
 
 #### Scenario: Conteúdo do rodapé
 
@@ -122,21 +122,12 @@ Enquanto a clínica não enviar o CNPJ, o placeholder "[nº]" DEVE aparecer como
 #### Scenario: CNPJ pendente
 
 - **WHEN** o CNPJ ainda não foi informado
-- **THEN** o rodapé mostra "CNPJ [nº]"
+- **THEN** o rodapé termina em "© {ano} Odonto Excellence Itapoá", sem "CNPJ" nem "[nº]"
 
 #### Scenario: Responsável técnico (CFO)
 
 - **WHEN** qualquer página é carregada
 - **THEN** o rodapé exibe "Responsável técnico: Dr. Renato Gonzales de Souza Forti — CRO-SC 22.911 · EPAO-SC 1.579"
-
-### Requirement: Página inicial vazia
-
-A página inicial DEVE conter só o Nav, um conteúdo principal vazio e o rodapé, já na identidade nova, até as seções da landing page serem construídas. O style guide do Lumos NÃO DEVE aparecer.
-
-#### Scenario: Página inicial
-
-- **WHEN** o usuário abre `/`
-- **THEN** vê o Nav, um espaço vazio sobre fundo branco e o rodapé, sem nenhum texto ou imagem do Lumos
 
 ### Requirement: Somente conteúdo público é publicado
 

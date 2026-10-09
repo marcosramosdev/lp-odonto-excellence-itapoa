@@ -183,6 +183,10 @@ if (import.meta.env.DEV && render) {
 
       .stacked > & {
         aspect-ratio: var(--_visual-ratio);
+        > :is(.image, .video) {
+          position: absolute;
+          inset: 0;
+        }
       }
 
       .cover > & {

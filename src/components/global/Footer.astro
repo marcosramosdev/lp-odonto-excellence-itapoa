@@ -1,7 +1,7 @@
 ---
-import Img from "@/components/media/Img.astro";
-import logo from "@/assets/logo/logo-odonto-excellence.png";
-import { SITE_NAME } from "@/consts.ts";
+import Img from '@/components/media/Img.astro';
+import logo from '@/assets/logo/logo-odonto-excellence.png';
+import { SITE_NAME } from '@/consts.ts';
 
 interface Props {
   /** Set to `false` to omit the component. */
@@ -30,15 +30,15 @@ const { render = true } = Astro.props;
             <address class="footer_address">
               <p>Av. Celso Ramos, 512 — Cambijú, Itapoá - SC, CEP 89249-000</p>
               <p>
-                WhatsApp:{" "}
+                WhatsApp:{' '}
                 <a
                   href="https://wa.me/5547997660991"
                   target="_blank"
                   rel="noopener"
                 >
                   (47) 99766-0991
-                </a>{" "}
-                · Instagram:{" "}
+                </a>{' '}
+                · Instagram:{' '}
                 <a
                   href="https://www.instagram.com/odontoexcellence_itapoa/"
                   target="_blank"
@@ -57,7 +57,7 @@ const { render = true } = Astro.props;
           </p>
           <p>
             &copy; <span id="year">{new Date().getFullYear()}</span>&#160;
-            {SITE_NAME} · CNPJ [nº]
+            {SITE_NAME}
           </p>
         </div>
       </div>
@@ -66,7 +66,7 @@ const { render = true } = Astro.props;
 }
 
 <script>
-  const year = document.querySelector<HTMLSpanElement>("#year");
+  const year = document.querySelector<HTMLSpanElement>('#year');
 
   if (year) {
     year.textContent = new Date().getFullYear().toString();
@@ -80,7 +80,7 @@ const { render = true } = Astro.props;
       justify-content: center;
       padding-block: var(--section-space-small);
       padding-inline: var(--site-margin);
-      background-color: var(--background-2);
+      background-color: var(--background);
       color: var(--text);
       border-top: var(--border-width) solid var(--border);
     }
